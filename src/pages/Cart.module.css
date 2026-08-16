@@ -1,0 +1,50 @@
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.info {
+    flex: 1;
+}
+
+.qtyBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: white;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--color-accent);
+    min-width: 70px;
+    text-align: right;
+}
+
+.remove {
+    background: transparent;
+    color: crimson;
+    border: none;
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px;
+    color: var(--color-primary);
+}

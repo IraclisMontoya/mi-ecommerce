@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 function Layout() {
     const [cart, setCart] = useState([])
@@ -17,12 +18,27 @@ function Layout() {
         })
     }
 
+    function removeFromCart(productId) {
+        setCart((prevCart) => prevCart.filter((item) => item.id !== productId))
+    }
+
+    function updateQuantity(productId, newQuantity) {
+        if (newQuantity <= 0) {
+            removeFromCart(productId)
+            return
+        }
+        setCart((prevCart) =>
+            prevCart.map((item) => (item.id === productId ? { ...item, quantity: newQuantity } : item))
+        )
+    }
+
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
         <>
             <Header cartCount={cartCount} />
-            <Outlet context={{ cart, addToCart }} />
+            <Outlet context={{ cart, addToCart, removeFromCart, updateQuantity }} />
+            <Footer />
         </>
     )
 }
