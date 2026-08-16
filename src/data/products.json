@@ -1,0 +1,134 @@
+[
+    {
+        "id": 1,
+        "name": "Finca La Esperanza",
+        "roastType": "Clásico",
+        "format": "Grano",
+        "weight": "250g",
+        "price": 12.5,
+        "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80",
+        "shortDescription": "Tueste medio, notas a chocolate y nuez.",
+        "description": "Café 100% arábica de tueste medio, cultivado en altura. Notas a chocolate, nuez y un final suave. Ideal para prensa francesa o cafetera de goteo."
+    },
+    {
+        "id": 2,
+        "name": "Finca La Esperanza",
+        "roastType": "Clásico",
+        "format": "Molido",
+        "weight": "500g",
+        "price": 20.0,
+        "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80",
+        "shortDescription": "Tueste medio, notas a chocolate y nuez.",
+        "description": "La misma Finca La Esperanza, ya molida para tu cafetera de goteo o filtro. Notas a chocolate, nuez y un final suave."
+    },
+    {
+        "id": 3,
+        "name": "Finca La Esperanza",
+        "roastType": "Clásico",
+        "format": "Grano",
+        "weight": "1kg",
+        "price": 27.5,
+        "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80",
+        "shortDescription": "Presentación grande, en grano.",
+        "description": "Bolsa de 1kg para quienes consumen café todos los días. Tueste medio, notas a chocolate y nuez."
+    },
+    {
+        "id": 4,
+        "name": "Reserva Gourmet Oscuro",
+        "roastType": "Gourmet",
+        "format": "Molido",
+        "weight": "250g",
+        "price": 17.5,
+        "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80",
+        "shortDescription": "Tueste oscuro, cuerpo intenso.",
+        "description": "Selección gourmet de tueste oscuro, cuerpo intenso y notas ahumadas con un toque dulce. Molienda media, perfecta para espresso."
+    },
+    {
+        "id": 5,
+        "name": "Reserva Gourmet Oscuro",
+        "roastType": "Gourmet",
+        "format": "Grano",
+        "weight": "250g",
+        "price": 15.0,
+        "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80",
+        "shortDescription": "Tueste oscuro, en grano entero.",
+        "description": "La misma Reserva Gourmet Oscuro en grano entero, para quien prefiere molerlo justo antes de prepararlo."
+    },
+    {
+        "id": 6,
+        "name": "Reserva Gourmet Oscuro",
+        "roastType": "Gourmet",
+        "format": "Molido",
+        "weight": "500g",
+        "price": 27.0,
+        "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80",
+        "shortDescription": "Presentación grande, molido.",
+        "description": "Bolsa de 500g de nuestra Reserva Gourmet Oscuro, cuerpo intenso y notas ahumadas."
+    },
+    {
+        "id": 7,
+        "name": "Clásico de la Casa",
+        "roastType": "Clásico",
+        "format": "Molido",
+        "weight": "1kg",
+        "price": 20.0,
+        "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
+        "shortDescription": "El favorito de todos los días.",
+        "description": "Nuestra mezcla más vendida: equilibrada, suave y consistente. Perfecta para el consumo diario en casa o la oficina."
+    },
+    {
+        "id": 8,
+        "name": "Clásico de la Casa",
+        "roastType": "Clásico",
+        "format": "Grano",
+        "weight": "1kg",
+        "price": 20.0,
+        "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
+        "shortDescription": "El favorito de todos los días, en grano.",
+        "description": "La misma mezcla equilibrada del Clásico de la Casa, en grano entero para mayor frescura."
+    },
+    {
+        "id": 9,
+        "name": "Clásico de la Casa",
+        "roastType": "Clásico",
+        "format": "Molido",
+        "weight": "250g",
+        "price": 8.0,
+        "image": "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
+        "shortDescription": "Presentación chica, ideal para probar.",
+        "description": "Bolsa de 250g del Clásico de la Casa, perfecta para probar antes de comprar la presentación grande."
+    },
+    {
+        "id": 10,
+        "name": "Gourmet Origen Único",
+        "roastType": "Gourmet",
+        "format": "Grano",
+        "weight": "250g",
+        "price": 18.75,
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
+        "shortDescription": "Un solo origen, lote limitado.",
+        "description": "Café de origen único, lote limitado, con notas frutales brillantes y acidez cítrica. Para quienes buscan una taza con carácter."
+    },
+    {
+        "id": 11,
+        "name": "Gourmet Origen Único",
+        "roastType": "Gourmet",
+        "format": "Molido",
+        "weight": "250g",
+        "price": 18.75,
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
+        "shortDescription": "Un solo origen, ya molido.",
+        "description": "La misma selección de origen único, molida para tu método de preparación favorito. Notas frutales y acidez cítrica."
+    },
+    {
+        "id": 12,
+        "name": "Gourmet Origen Único",
+        "roastType": "Gourmet",
+        "format": "Grano",
+        "weight": "500g",
+        "price": 34.0,
+        "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
+        "shortDescription": "Presentación grande, lote limitado.",
+        "description": "Bolsa de 500g de nuestro café de origen único, mientras dure el lote limitado."
+    }
+]
