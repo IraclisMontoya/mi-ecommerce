@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
 
 function ProductDetail() {
     const { id } = useParams()
+    const { addToCart } = useOutletContext()
     const [product, setProduct] = useState(null)
 
     useEffect(() => {
@@ -21,7 +22,7 @@ function ProductDetail() {
             <p>{product.description}</p>
             <p>{product.roastType} · {product.format} · {product.weight}</p>
             <p>${product.price.toFixed(2)}</p>
-            <button>Agregar al carrito</button>
+            <button onClick={() => addToCart(product)}>Agregar al carrito</button>
         </div>
     )
 }

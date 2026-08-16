@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './ProductCard.module.css'
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
   return (
     <div className={styles.card}>
       <Link to={`/productos/${product.id}`}>
@@ -11,7 +11,7 @@ function ProductCard({ product }) {
         <p className={styles.meta}>{product.roastType} · {product.format} · {product.weight}</p>
         <p className={styles.price}>${product.price.toFixed(2)}</p>
       </Link>
-      <button>Agregar al carrito</button>
+      <button onClick={() => onAddToCart(product)}>Agregar al carrito</button>
     </div>
   )
 }
