@@ -22,3 +22,12 @@
     color: var(--color-accent);
     font-size: 18px;
 }
+
+.cta {
+    color: var(--color-accent);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+}

@@ -48,3 +48,14 @@
     margin-top: 20px;
     color: var(--color-primary);
 }
+
+.checkoutBtn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 16px;
+}

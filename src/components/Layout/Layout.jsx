@@ -32,15 +32,26 @@ function Layout() {
         )
     }
 
+    const [user, setUser] = useState(null)
+
+    function login(userData) {
+        setUser(userData)
+    }
+
+    function logout() {
+        setUser(null)
+    }
+
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
         <>
-            <Header cartCount={cartCount} />
-            <Outlet context={{ cart, addToCart, removeFromCart, updateQuantity }} />
+            <Header cartCount={cartCount} user={user} onLogout={logout} />
+            <Outlet context={{ cart, addToCart, removeFromCart, updateQuantity, user, login }} />
             <Footer />
         </>
     )
+
 }
 
 export default Layout

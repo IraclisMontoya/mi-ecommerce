@@ -10,6 +10,7 @@ function ProductCard({ product, onAddToCart }) {
         <p>{product.shortDescription}</p>
         <p className={styles.meta}>{product.roastType} · {product.format} · {product.weight}</p>
         <p className={styles.price}>${product.price.toFixed(2)}</p>
+        <p className={styles.cta}>Ver descripción →</p>
       </Link>
       <button onClick={() => onAddToCart(product)}>Agregar al carrito</button>
     </div>

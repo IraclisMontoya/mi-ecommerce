@@ -1,0 +1,92 @@
+.wrap {
+    padding: 20px 0;
+}
+
+.layout {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.form {
+    flex: 2;
+    min-width: 280px;
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(75, 46, 43, 0.12);
+}
+
+.field {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.field input {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+.error {
+    color: crimson;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.submit {
+    width: 100%;
+    background: var(--color-accent);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+}
+
+.summary {
+    flex: 1;
+    min-width: 220px;
+    background: var(--color-bg);
+    border-radius: 10px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.summaryTotal {
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: none;
+}
+
+.confirmed {
+    text-align: center;
+    max-width: 420px;
+    margin: 60px auto;
+}
+
+.check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: green;
+    color: white;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
