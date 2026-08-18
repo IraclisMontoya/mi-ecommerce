@@ -1,0 +1,16 @@
+.promos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.promoBadge {
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent);
+    color: var(--color-primary);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: bold;
+}
