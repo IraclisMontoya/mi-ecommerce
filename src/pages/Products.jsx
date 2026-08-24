@@ -7,11 +7,14 @@ import styles from './Products.module.css'
 function Products() {
     const { addToCart } = useOutletContext()
     const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        getAllProducts().then((data) => {
-            setProducts(data)
-        })
+        getAllProducts()
+            .then((data) => setProducts(data))
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false))
     }, [])
 
     return (
@@ -23,11 +26,17 @@ function Products() {
                 <span className={styles.promoBadge}>🏷️ 10% de descuento en compras desde $1,000</span>
             </div>
 
-            <div className="product-grid">
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
-                ))}
-            </div>
+            {loading && <p>Cargando productos...</p>}
+
+            {error && <p>{error}</p>}
+
+            {!loading && !error && (
+                <div className="product-grid">
+                    {products.map((product) => (
+                        <ProductCard key={product._id} product={product} onAddToCart={addToCart} />
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

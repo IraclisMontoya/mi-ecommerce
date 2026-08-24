@@ -10,17 +10,30 @@ function ProductDetail() {
     const { addToCart } = useOutletContext()
 
     const [product, setProduct] = useState(null)
+    const [error, setError] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const [added, setAdded] = useState(false)
 
     useEffect(() => {
         setProduct(null)
+        setError(null)
         setAdded(false)
         setQuantity(1)
-        getProductById(id).then((data) => {
-            setProduct(data)
-        })
+        getProductById(id)
+            .then((data) => setProduct(data))
+            .catch((err) => setError(err.message))
     }, [id])
+
+    if (error) {
+        return (
+            <div className={styles.wrap}>
+                <p>{error}</p>
+                <button className={styles.back} onClick={() => navigate('/productos')}>
+                    ← Volver al catálogo
+                </button>
+            </div>
+        )
+    }
 
     if (!product) return <p className={styles.loading}>Cargando...</p>
 

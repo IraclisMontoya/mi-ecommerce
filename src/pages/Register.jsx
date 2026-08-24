@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
-import { loginUser } from '../services/authService'
+import { registerUser } from '../services/authService'
 import styles from './Login.module.css'
 
-function Login() {
+function Register() {
     const { login } = useOutletContext()
     const navigate = useNavigate()
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -15,8 +16,12 @@ function Login() {
     async function handleSubmit(event) {
         event.preventDefault()
 
-        if (!email || !password) {
-            setError('Completa correo y contraseña.')
+        if (!name || !email || !password) {
+            setError('Completa todos los campos.')
+            return
+        }
+        if (password.length < 4) {
+            setError('La contraseña debe tener al menos 4 caracteres.')
             return
         }
 
@@ -24,7 +29,7 @@ function Login() {
         setLoading(true)
 
         try {
-            const data = await loginUser({ email, password })
+            const data = await registerUser({ name, email, password })
             login(data.user, data.token)
             navigate('/')
         } catch (err) {
@@ -37,7 +42,12 @@ function Login() {
     return (
         <div className={styles.wrap}>
             <form className={styles.card} onSubmit={handleSubmit}>
-                <h1>Iniciar sesión</h1>
+                <h1>Crear cuenta</h1>
+
+                <label className={styles.field}>
+                    Nombre
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Tu nombre" />
+                </label>
 
                 <label className={styles.field}>
                     Correo electrónico
@@ -52,15 +62,15 @@ function Login() {
                 {error && <p className={styles.error}>{error}</p>}
 
                 <button type="submit" className={styles.submit} disabled={loading}>
-                    {loading ? 'Entrando...' : 'Entrar'}
+                    {loading ? 'Creando cuenta...' : 'Registrarme'}
                 </button>
 
                 <p className={styles.hint}>
-                    ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
+                    ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
                 </p>
             </form>
         </div>
     )
 }
 
-export default Login
+export default Register

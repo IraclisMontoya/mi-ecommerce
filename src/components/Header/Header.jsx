@@ -8,13 +8,15 @@ function Header({ cartCount, user, onLogout }) {
             <nav className={styles.nav}>
                 <NavLink to="/" end>Inicio</NavLink>
                 <NavLink to="/productos">Catálogo</NavLink>
-                <Link to="/carrito">🛒 {cartCount}{user ? (
+                <Link to="/carrito">🛒 {cartCount}</Link>
+                {user ? (
                     <span>
-                        Hola, {user.name} <button onClick={onLogout}>Salir</button>
+                        <Link to="/perfil">Hola, {user.name}</Link>
+                        <button className={styles.logoutBtn} onClick={onLogout}>Cerrar sesión</button>
                     </span>
                 ) : (
                     <Link to="/login">Iniciar sesión</Link>
-                )}</Link>
+                )}
             </nav>
         </header>
     )

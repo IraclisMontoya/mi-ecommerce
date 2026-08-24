@@ -5,14 +5,24 @@ import homeSlides from '../data/homeSlides.json'
 import { getAllProducts } from '../services/productService'
 import styles from './Home.module.css'
 
+const FEATURED_NAMES = [
+    'Finca Esperanza (Grano)',
+    'Reserva del Volcán',
+    'Selección Gourmet Especial',
+    'Edición Limitada Cosecha',
+]
+
 function Home() {
     const [featured, setFeatured] = useState([])
+    const [error, setError] = useState(null)
 
     useEffect(() => {
-        getAllProducts().then((data) => {
-            const seleccionados = data.filter((product) => [1, 4, 7, 10].includes(product.id))
-            setFeatured(seleccionados)
-        })
+        getAllProducts()
+            .then((data) => {
+                const seleccionados = data.filter((product) => FEATURED_NAMES.includes(product.name))
+                setFeatured(seleccionados)
+            })
+            .catch((err) => setError(err.message))
     }, [])
 
     return (
@@ -49,9 +59,10 @@ function Home() {
 
             <section>
                 <h2 className={styles.sectionTitle}>Algunos de nuestros cafés</h2>
+                {error && <p>{error}</p>}
                 <div className={styles.mentions}>
                     {featured.map((product) => (
-                        <Link to={`/productos/${product.id}`} key={product.id} className={styles.mentionCard}>
+                        <Link to={`/productos/${product._id}`} key={product._id} className={styles.mentionCard}>
                             <img src={product.image} alt={product.name} />
                             <p>{product.name}</p>
                         </Link>
@@ -85,4 +96,3 @@ function Home() {
 }
 
 export default Home
-

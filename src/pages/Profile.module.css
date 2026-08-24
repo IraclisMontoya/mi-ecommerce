@@ -1,0 +1,19 @@
+.wrap {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 24px;
+}
+
+.wrap p {
+    margin: 8px 0;
+}
+
+.logoutBtn {
+    margin-top: 20px;
+    background: crimson;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}

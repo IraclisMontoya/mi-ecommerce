@@ -17,3 +17,15 @@
     margin-left: 16px;
     text-decoration: none;
 }
+
+.logoutBtn {
+    margin-left: 16px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: inherit;
+    font-family: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+}

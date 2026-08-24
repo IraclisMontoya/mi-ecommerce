@@ -1,33 +1,32 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useOutletContext } from 'react-router-dom'
+import { createOrder } from '../services/orderService'
+import { calculateOrderTotals } from '../utils/pricing'
 import styles from './Checkout.module.css'
 
-const FREE_SHIPPING_MIN = 500
-const DISCOUNT_MIN = 1000
-const SHIPPING_COST = 99
-const DISCOUNT_RATE = 0.10
-
 function Checkout() {
-    const { cart, user, clearCart } = useOutletContext()
+    const { cart, user, refreshCart } = useOutletContext()
     const navigate = useNavigate()
 
+    const savedAddress = JSON.parse(localStorage.getItem('shippingAddress') || '{}')
+
     const [step, setStep] = useState('address')
-    const [fullName, setFullName] = useState('')
-    const [street, setStreet] = useState('')
-    const [city, setCity] = useState('')
-    const [zip, setZip] = useState('')
-    const [phone, setPhone] = useState('')
+    const [fullName, setFullName] = useState(savedAddress.fullName || '')
+    const [street, setStreet] = useState(savedAddress.street || '')
+    const [city, setCity] = useState(savedAddress.city || '')
+    const [zip, setZip] = useState(savedAddress.zip || '')
+    const [phone, setPhone] = useState(savedAddress.phone || '')
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [orderTotal, setOrderTotal] = useState(0)
 
     if (!user) return <Navigate to="/login" replace />
-    if (cart.length === 0 && step !== 'confirmed') return <Navigate to="/carrito" replace />
+    if (cart.items.length === 0 && step !== 'confirmed') return <Navigate to="/carrito" replace />
 
-    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    const shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST
-    const discount = subtotal >= DISCOUNT_MIN ? subtotal * DISCOUNT_RATE : 0
-    const total = subtotal + shipping - discount
+    const subtotal = cart.items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+    const { shipping, discount, total } = calculateOrderTotals(subtotal)
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault()
 
         if (!fullName || !street || !city || !zip || !phone) {
@@ -36,8 +35,19 @@ function Checkout() {
         }
 
         setError('')
-        setStep('confirmed')
-        clearCart()
+        setLoading(true)
+
+        try {
+            await createOrder({ fullName, street, city, zip, phone })
+            localStorage.setItem('shippingAddress', JSON.stringify({ fullName, street, city, zip, phone }))
+            setOrderTotal(total)
+            setStep('confirmed')
+            await refreshCart()
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     if (step === 'confirmed') {
@@ -46,7 +56,7 @@ function Checkout() {
                 <div className={styles.check}>✓</div>
                 <h1>¡Pedido confirmado!</h1>
                 <p>
-                    Gracias, {user.name}. Tu pedido por <strong>${total.toFixed(2)}</strong> se enviará a {street}, {city}.
+                    Gracias, {user.name}. Tu pedido por <strong>${orderTotal.toFixed(2)}</strong> se enviará a {street}, {city}.
                 </p>
                 <button onClick={() => navigate('/productos')}>Seguir comprando</button>
             </div>
@@ -86,15 +96,17 @@ function Checkout() {
 
                     {error && <p className={styles.error}>{error}</p>}
 
-                    <button type="submit" className={styles.submit}>Pagar ${total.toFixed(2)}</button>
+                    <button type="submit" className={styles.submit} disabled={loading}>
+                        {loading ? 'Procesando...' : `Pagar $${total.toFixed(2)}`}
+                    </button>
                 </form>
 
                 <aside className={styles.summary}>
                     <h2>Tu pedido</h2>
-                    {cart.map((item) => (
-                        <div className={styles.summaryRow} key={item.id}>
-                            <span>{item.name} × {item.quantity}</span>
-                            <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    {cart.items.map((item) => (
+                        <div className={styles.summaryRow} key={item.product._id}>
+                            <span>{item.product.name} × {item.quantity}</span>
+                            <span>${(item.product.price * item.quantity).toFixed(2)}</span>
                         </div>
                     ))}
                     <div className={styles.summaryRow}>
