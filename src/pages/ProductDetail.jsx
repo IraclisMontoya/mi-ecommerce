@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
+import useFetch from '../hooks/useFetch'
 import styles from './ProductDetail.module.css'
 
 const DECORATIVE_IMAGE = 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80'
@@ -10,18 +11,12 @@ function ProductDetail() {
     const navigate = useNavigate()
     const { cart, addToCart, updateQuantity } = useOutletContext()
 
-    const [product, setProduct] = useState(null)
-    const [error, setError] = useState(null)
+    const { data: product, error } = useFetch(() => getProductById(id), [id])
     const [quantity, setQuantity] = useState(1)
     const [added, setAdded] = useState(false)
 
     useEffect(() => {
-        setProduct(null)
-        setError(null)
         setAdded(false)
-        getProductById(id)
-            .then((data) => setProduct(data))
-            .catch((err) => setError(err.message))
     }, [id])
 
     useEffect(() => {

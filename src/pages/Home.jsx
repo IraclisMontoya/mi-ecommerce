@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BannerCarousel from '../components/BannerCarousel/BannerCarousel'
 import homeSlides from '../data/homeSlides.json'
 import { getAllProducts } from '../services/productService'
+import useFetch from '../hooks/useFetch'
 import styles from './Home.module.css'
 
 const FEATURED_NAMES = [
@@ -13,17 +13,8 @@ const FEATURED_NAMES = [
 ]
 
 function Home() {
-    const [featured, setFeatured] = useState([])
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        getAllProducts()
-            .then((data) => {
-                const seleccionados = data.filter((product) => FEATURED_NAMES.includes(product.name))
-                setFeatured(seleccionados)
-            })
-            .catch((err) => setError(err.message))
-    }, [])
+    const { data, error } = useFetch(getAllProducts, [])
+    const featured = (data || []).filter((product) => FEATURED_NAMES.includes(product.name))
 
     return (
         <div>

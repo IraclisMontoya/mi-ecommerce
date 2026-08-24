@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import ProductCard from '../components/ProductCard/ProductCard'
 import { getAllProducts } from '../services/productService'
+import useFetch from '../hooks/useFetch'
 import styles from './Products.module.css'
 
 function Products() {
     const { addToCart } = useOutletContext()
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        getAllProducts()
-            .then((data) => setProducts(data))
-            .catch((err) => setError(err.message))
-            .finally(() => setLoading(false))
-    }, [])
+    const { data, loading, error } = useFetch(getAllProducts, [])
+    const products = data || []
 
     return (
         <div>
@@ -42,4 +34,3 @@ function Products() {
 }
 
 export default Products
-

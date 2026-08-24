@@ -1,44 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useNavigate, Outlet } from 'react-router-dom'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { getCart, addItemToCart, removeItemFromCart, updateCartItemQuantity } from '../../services/cartService'
+import useCart from '../../hooks/useCart'
 
 function Layout() {
-    const navigate = useNavigate()
-    const [cart, setCart] = useState({ items: [] })
-
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem('user')
         return savedUser ? JSON.parse(savedUser) : null
     })
 
-    useEffect(() => {
-        if (user) {
-            getCart().then(setCart).catch(() => setCart({ items: [] }))
-        } else {
-            setCart({ items: [] })
-        }
-    }, [user])
-
-    async function addToCart(product, quantity = 1) {
-        if (!user) {
-            navigate('/login')
-            return
-        }
-        const updatedCart = await addItemToCart(product._id, quantity)
-        setCart(updatedCart)
-    }
-
-    async function removeFromCart(productId) {
-        const updatedCart = await removeItemFromCart(productId)
-        setCart(updatedCart)
-    }
-
-    async function updateQuantity(productId, newQuantity) {
-        const updatedCart = await updateCartItemQuantity(productId, newQuantity)
-        setCart(updatedCart)
-    }
+    const { cart, cartCount, addToCart, removeFromCart, updateQuantity, refreshCart, resetCart } = useCart(user)
 
     function login(userData, token) {
         setUser(userData)
@@ -46,21 +18,12 @@ function Layout() {
         localStorage.setItem('token', token)
     }
 
-    async function refreshCart() {
-        if (user) {
-            const updatedCart = await getCart()
-            setCart(updatedCart)
-        }
-    }
-
     function logout() {
         setUser(null)
-        setCart({ items: [] })
+        resetCart()
         localStorage.removeItem('user')
         localStorage.removeItem('token')
     }
-
-    const cartCount = cart.items.reduce((sum, item) => sum + item.quantity, 0)
 
     return (
         <>
