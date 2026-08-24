@@ -8,15 +8,15 @@ function authHeaders() {
     }
 }
 
-export async function createOrder(shippingAddress) {
+export async function createOrder({ shippingAddress, paymentMethod, paymentReference }) {
     const response = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: authHeaders(),
-        body: JSON.stringify({ shippingAddress }),
+        body: JSON.stringify({ shippingAddress, paymentMethod, paymentReference }),
     })
     const data = await response.json()
     if (!response.ok) {
-        throw new Error(data.message || 'No se pudo crear la orden.')
+        throw new Error(data.error || data.message || 'No se pudo crear la orden.')
     }
     return data
 }

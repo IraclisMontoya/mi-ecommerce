@@ -90,3 +90,87 @@
     justify-content: center;
     margin: 0 auto 16px;
 }
+
+.methods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--color-bg);
+    border-radius: 8px;
+}
+
+.methodOption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.hint {
+    background: var(--color-bg);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.paymentSummary {
+    color: var(--color-accent);
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    margin-left: 8px;
+}
+
+.badgeVisa {
+    background: #1a1f71;
+    font-style: italic;
+}
+
+.badgeMastercard {
+    background: linear-gradient(90deg, #eb001b 50%, #f79e1b 50%);
+}
+
+.badgePaypal {
+    background: #003087;
+}
+
+.badgeApplePay {
+    background: #000;
+}
+
+.badgeOxxo {
+    background: #e30613;
+}
+
+.brandPicker {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.brandOption {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.brandOptionActive {
+    border-color: var(--color-accent);
+    background: var(--color-bg);
+}

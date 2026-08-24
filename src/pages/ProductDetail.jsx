@@ -4,10 +4,11 @@ import { getProductById } from '../services/productService'
 import styles from './ProductDetail.module.css'
 
 const DECORATIVE_IMAGE = 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80'
+
 function ProductDetail() {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { addToCart } = useOutletContext()
+    const { cart, addToCart, updateQuantity } = useOutletContext()
 
     const [product, setProduct] = useState(null)
     const [error, setError] = useState(null)
@@ -18,11 +19,16 @@ function ProductDetail() {
         setProduct(null)
         setError(null)
         setAdded(false)
-        setQuantity(1)
         getProductById(id)
             .then((data) => setProduct(data))
             .catch((err) => setError(err.message))
     }, [id])
+
+    useEffect(() => {
+        if (!product) return
+        const cartItem = cart.items.find((item) => item.product._id === product._id)
+        setQuantity(cartItem ? cartItem.quantity : 1)
+    }, [product, cart])
 
     if (error) {
         return (
@@ -41,7 +47,12 @@ function ProductDetail() {
     const increaseQty = () => setQuantity((q) => q + 1)
 
     const handleAddToCart = () => {
-        addToCart(product, quantity)
+        const cartItem = cart.items.find((item) => item.product._id === product._id)
+        if (cartItem) {
+            updateQuantity(product._id, quantity)
+        } else {
+            addToCart(product, quantity)
+        }
         setAdded(true)
     }
 
