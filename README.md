@@ -1,16 +1,47 @@
-# React + Vite
+# Café Origen — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Tienda en línea de café tostado, construida con React. Catálogo de productos, autenticación de usuarios, carrito persistente y checkout con métodos de pago simulados.
 
-Currently, two official plugins are available:
+**Demo en vivo:** https://mi-ecommerce-o3kt.onrender.com
+**API (backend):** https://github.com/IraclisMontoya/mi-ecommerce-api
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> Nota: el sitio está en un plan gratuito de hosting. Si no ha recibido visitas recientemente, la primera carga puede tardar unos segundos mientras el servidor "despierta".
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Catálogo de productos conectado a una API real (MongoDB vía backend propio)
+- Registro e inicio de sesión con JWT, rutas protegidas
+- Carrito de compras persistente por usuario (se guarda en la base de datos, no solo en el navegador)
+- Checkout con dirección de envío, selección de método de pago (tarjeta, PayPal, Apple Pay, OXXO) y validación de formato de tarjeta (algoritmo de Luhn)
+- Manejo de errores con Error Boundary global
+- Pruebas automatizadas con Vitest y React Testing Library
+- Entornos separados para desarrollo y producción
+- Despliegue continuo: cada cambio subido a `main` se publica automáticamente
 
-## Expanding the Oxlint configuration
+## Stack técnico
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+React + Vite, React Router, CSS Modules, Vitest + React Testing Library, fetch API para consumo del backend.
+
+## Cómo correrlo localmente
+
+```
+npm install
+npm run dev
+```
+
+Requiere un archivo `.env.development` con la variable `VITE_API_URL` apuntando al backend (local o desplegado).
+
+## Estructura del proyecto
+
+```
+src/
+  components/   componentes reutilizables (Header, Footer, ProductCard, ErrorBoundary...)
+  pages/        vistas de cada ruta (Home, Products, ProductDetail, Cart, Checkout...)
+  services/     funciones que hablan con la API (fetch)
+  hooks/        lógica reutilizable (useFetch, useCart)
+  utils/        funciones puras (cálculo de totales, validación de tarjeta)
+```
+
+## Documentación relacionada
+
+Ver [POSTMORTEM.md](https://github.com/IraclisMontoya/mi-ecommerce-api/blob/main/POSTMORTEM.md) en el repositorio del backend para una reflexión sobre los retos técnicos del proyecto y las lecciones aprendidas.
